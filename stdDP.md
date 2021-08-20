@@ -9,7 +9,7 @@ Following are two versions of coin change problem:
 
 ### Coin Change (LeetCode 322)
 
-**Problem Link: https://leetcode.com/problems/coin-change/**
+**Problem Link : https://leetcode.com/problems/coin-change/**
 
 ```cpp
 
@@ -56,3 +56,39 @@ public:
 
 ```
 
+### Subset Sum Problem - GFG
+
+**Problem Link : https://practice.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1/** 
+
+```cpp
+
+class Solution{   
+public:
+    bool isSubsetSum(int n, int arr[], int sum){
+        int dp[n + 1][sum + 1];
+        
+        memset(dp, 0, sizeof(dp));
+        
+        for (int i = 0; i < n + 1; ++i) {
+            for (int j = 0; j <= sum; ++j) {
+                if (i == 0 && j == 0) {
+                    dp[i][j] = true;
+                } else if (i == 0) {
+                    dp[i][j] == false;
+                } else if (j == 0) {
+                    dp[i][j] = true;
+                } else {
+                    if (j < arr[i - 1]) {
+                        dp[i][j] = dp[i - 1][j];
+                    } else {
+                        dp[i][j] = dp[i - 1][j] || dp[i - 1][j - arr[i - 1]];
+                    }
+                }
+            }
+        }
+        
+        return dp[n][sum];
+    }
+};
+
+```
