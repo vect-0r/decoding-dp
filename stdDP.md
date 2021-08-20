@@ -56,7 +56,7 @@ public:
 
 ```
 
-### Subset Sum Problem - GFG
+## Subset Sum Problem - GFG
 
 **Problem Link : https://practice.geeksforgeeks.org/problems/subset-sum-problem-1611555638/1/** 
 
