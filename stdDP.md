@@ -1,5 +1,5 @@
 
-
+# Group 1
 
 ## Coin Change
 
@@ -183,3 +183,31 @@ public:
     - Duplicates allowed : 1D memo
     - Duplicates not allowed : 2D memo
     - One dp problem usually has many variations. You just have to solve a lot of problems to be able to identify the pattern.
+
+# Group 2
+
+## Count the number of binary strings of length N with no consecutive 1's allowed
+
+**Problem Link : https://practice.geeksforgeeks.org/problems/consecutive-1s-not-allowed1912/1#**
+
+```cpp
+
+const ll MOD = 1e9 + 7;
+
+class Solution{
+public:
+	// #define ll long long
+	ll countStrings(int n) {
+	    ll dp0[n + 1], dp1[n + 1];
+	    memset(dp0, 0, sizeof(dp0));
+	    memset(dp1, 0, sizeof(dp1));
+	    dp0[1] = dp1[1] = 1;
+	    for (ll i = 2; i <= n; ++i) {
+	        dp0[i] = (dp0[i - 1] + dp1[i - 1]) % MOD;
+	        dp1[i] = dp0[i - 1] % MOD;
+	    }
+	    return (dp0[n] + dp1[n]) % MOD;
+	}
+};
+
+```
