@@ -125,8 +125,6 @@ public:
 
 **Problem Link : https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1#**
 
-- Also has a 1-D dp space-optimised solution, instead of the 2-D dp solution below. 
-
 ```cpp
 
 class Solution
@@ -155,3 +153,33 @@ class Solution
 };
 
 ```
+
+## Unbounded Knapsack - GFG
+
+**Problem Link : https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1#**
+
+```cpp
+
+class Solution{
+public:
+    int knapSack(int N, int W, int val[], int wt[])
+    {
+        int dp[W + 1];
+        
+        memset(dp, 0, sizeof(dp));
+        
+        for (int i = 0; i <= W; ++i)
+            for (int j = 0; j < N; j++)
+                if (i >= wt[j])
+                    dp[i] = max(dp[i], val[j] + dp[i - wt[j]]);
+        
+        return dp[W];
+    }
+};
+
+```
+
+- Observation: 
+    - Duplicates allowed : 1D memo
+    - Duplicates not allowed : 2D memo
+    - One dp problem usually has many variations. You just have to solve a lot of problems to be able to identify the pattern.
