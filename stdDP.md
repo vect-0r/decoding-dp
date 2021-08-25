@@ -287,3 +287,32 @@ class Solution{
     }
 };
 ```
+
+## Stikler Thief - Find the Maximum Sum such that no two elements are Adjacent (Greedy + DP) (GFG)
+
+**Problem Link : https://practice.geeksforgeeks.org/problems/stickler-theif-1587115621/1#**
+
+- Observation : Note the use of Grredy approach with dp to eliminate some portion of recursion tree.
+
+```cpp
+class Solution
+{
+    public:
+    //Function to find the maximum money the thief can get.
+    int FindMaxSum(int arr[], int n)
+    {
+        int inc = arr[0];
+        int exc = 0;
+        for (int i = 1; i < n; ++i) {
+            int n_inc = exc + arr[i];
+            int n_exc = max(exc, inc);
+            
+            inc = n_inc;
+            exc = n_exc;
+        }
+        
+        int ans = max(inc, exc);
+        return ans;
+    }
+};
+```
