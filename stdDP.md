@@ -250,3 +250,40 @@ public:
     }
 };
 ```
+
+
+## Count Subsequences of the form a^ib^jc^k - GFG
+
+**Problem Link : https://practice.geeksforgeeks.org/problems/count-subsequences-of-type-ai-bj-ck4425/1#**
+
+```cpp
+const int MOD = 1e9 + 7;
+
+class Solution{
+  public:
+    // s : given string
+    // return the expected answer
+    int fun(string &s) {
+        int a = 0;
+        int ab = 0;
+        int abc = 0;
+        
+        for (int i = 0; i < s.size(); ++i) {
+            if (s.at(i) == 'a') {
+                a = 1 + (2 * a) % MOD;
+                a %= MOD;
+            }
+            else if (s.at(i) == 'b') {
+                ab = a + (2 * ab) % MOD;
+                ab %= MOD;
+            }
+            else if (s.at(i) == 'c') {
+                abc = ab + (2 * abc) % MOD;
+                abc %= MOD;
+            }
+        }
+        
+        return abc % MOD;
+    }
+};
+```
