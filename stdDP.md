@@ -211,3 +211,42 @@ public:
 };
 
 ```
+
+## Decode Ways - LC 91
+
+**Problem Link : https://leetcode.com/problems/decode-ways/**
+
+```cpp
+class Solution {
+public:
+    int numDecodings(string s) {
+        if (s.at(0) == '0')
+            return 0;
+        int n = s.size();
+        int dp[n];
+        dp[0] = 1;
+        for (int i = 1; i < s.size(); ++i) {
+            if (s.at(i - 1) == '0' && s.at(i) == '0') { // 21100 -> 211-00 , 2110-0
+                dp[i] = 0;
+            } else if (s.at(i - 1) == '0' && s.at(i) != '0') { // 21103 -> 211-03 , 2110-3 
+                dp[i] = dp[i - 1];
+            } else if (s.at(i - 1) != '0' && s.at(i) == '0') { 
+                if (s.at(i - 1) == '1' || s.at(i - 1) == '2') { // 21120 -> 211-20 , 2112-0
+                    dp[i] = (i >= 2 ? dp[i - 2] : 1);
+                } else { // 21150 -> 211-50 , 2115-0
+                    dp[i] = 0; 
+                }
+            } else { // 21123 -> 211-23 , 2112-3; 21176 -> 2117-6 , 211-76
+                int lastTwo = stoi(s.substr(i - 1, 2));
+                if (lastTwo <= 26) {
+                    dp[i] = dp[i - 1] + (i >= 2 ? dp[i - 2] : 1);
+                }
+                else {
+                    dp[i] = dp[i - 1];
+                }
+            }
+        }
+        return dp[n - 1];
+    }
+};
+```
