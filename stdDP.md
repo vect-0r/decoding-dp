@@ -316,3 +316,30 @@ class Solution
     }
 };
 ```
+
+## Friends Pairing Problem - GFG
+
+**Problem Link : https://practice.geeksforgeeks.org/problems/friends-pairing-problem5425/1#**
+
+```cpp
+const int MOD = 1e9 + 7;
+
+class Solution {
+public:
+    int countFriendsPairings(int n) {
+        long long int dp[n + 1];
+        
+        memset(dp, 0, sizeof dp);
+        
+        dp[1] = 1;
+        dp[2] = 2;
+        
+        for (int i = 3; i <= n; ++i) {
+            dp[i] = dp[i - 1] % MOD; 
+            dp[i] += (dp[i - 2] % MOD) * ((i - 1) % MOD) % MOD;
+        }
+        
+        return dp[n] % MOD;
+    }
+};  
+```
