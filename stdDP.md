@@ -292,7 +292,7 @@ class Solution{
 
 **Problem Link : https://practice.geeksforgeeks.org/problems/stickler-theif-1587115621/1#**
 
-- Observation : Note the use of Grredy approach with dp to eliminate some portion of recursion tree.
+- Observation : Note the use of Greedy approach with dp to eliminate some portion of recursion tree.
 
 ```cpp
 class Solution
