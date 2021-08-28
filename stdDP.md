@@ -343,3 +343,23 @@ public:
     }
 };  
 ```
+
+## Best Time to Buy and Sell Stock with Transaction Fee - LC 714
+
+**Problem Link : https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/**
+
+- Note : The discuss section contains a marvellous post by @fun4LeetCode
+
+```cpp
+class Solution {
+public:
+    int maxProfit(vector<int>& prices, int fee) {
+        int hold = -prices[0], cash = 0;
+        for (int i = 1; i < prices.size(); ++i) {
+            cash = max(cash, hold + prices[i] - fee);
+            hold = max(hold, cash - prices[i]);
+        }
+        return cash;
+    }
+};
+```
