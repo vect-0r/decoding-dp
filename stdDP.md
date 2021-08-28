@@ -349,6 +349,7 @@ public:
 **Problem Link : https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/**
 
 - Note : The discuss section contains a marvellous post by @fun4LeetCode
+  - **https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/discuss/108870/Most-consistent-ways-of-dealing-with-the-series-of-stock-problems**
 
 ```cpp
 class Solution {
@@ -360,6 +361,50 @@ public:
             hold = max(hold, cash - prices[i]);
         }
         return cash;
+    }
+};
+```
+
+## Best Time to Buy and Sell Stock with Cooldown - LC 309
+
+**Problem Link : https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/**
+
+```cpp
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int obsp = -prices[0], ocsp = 0, ossp = 0;
+        for (int i = 1; i < prices.size(); ++i) {
+            int nbsp = 0;
+            int ncsp = 0;
+            int nssp = 0;
+            
+            // cooldown + buy vs. buy
+            if (ocsp - prices[i] > obsp) {
+                nbsp = ocsp - prices[i];
+            } else {
+                nbsp = obsp;
+            }
+            
+            // buy + sell vs. sell
+            if (obsp + prices[i] > ossp) {
+                nssp = obsp + prices[i];
+            } else {
+                nssp = obsp;
+            }
+            
+            // cooldown vs. sell & cooldown
+            if (ossp > ocsp) {
+                ncsp = ossp;
+            } else {
+                ncsp = ocsp;
+            }
+            
+            obsp = nbsp;
+            ocsp = ncsp;
+            ossp = nssp;
+        }
+        return max(ossp, ocsp);
     }
 };
 ```
