@@ -561,3 +561,42 @@ class Solution{
 	}  
 };
 ```
+
+## Longest Bitonic Subsequence - GFG
+
+**Problem Link : https://practice.geeksforgeeks.org/problems/longest-bitonic-subsequence0824/1#**
+
+```cpp
+class Solution{
+	public:
+	int LongestBitonicSequence(vector<int>& arr)
+	{
+	    int n = arr.size();
+	    
+	    vector<int> lis(n, 1), lds(n, 1);
+	    
+	    for (int i = 1; i < n; ++i) {
+	        for (int j = 0; j < i; ++j) {
+	            if (arr[i] > arr[j] && 1 + lis[j] > lis[i]) {
+	                lis[i] = 1 + lis[j];
+	            }
+	        }
+	    }
+	    
+	    for (int i = n - 2; i >= 0; --i) {
+	        for (int j = n - 1; j > i; --j) {
+	            if (arr[j] < arr[i] && lds[j] + 1 > lds[i]) {
+	                lds[i] = 1 + lds[j];
+	            }
+	        }
+	    }
+	    
+	    // return max in lis[i] + lis[j] - 1
+	    int ans = lis[0] + lds[0];
+	    for (int i = 1; i < n; ++i)
+	        if (lis[i] + lds[i] > ans)
+	            ans = lis[i] + lds[i];
+	    return ans - 1;
+	}
+};
+```
