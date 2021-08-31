@@ -502,3 +502,33 @@ public:
     }
 };
 ```
+
+## Longest Increasing Subsequence - LC 300
+
+**Problem Link : https://leetcode.com/problems/longest-increasing-subsequence/**
+
+```cpp
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        
+        int dp[n];
+        memset(dp, 0, sizeof dp);
+        
+        for (int i = 0; i < n; ++i) {
+            int mx = 0;
+            
+            for (int j = 0; j < i; ++j) {
+                if (nums[i] > nums[j] && dp[j] > mx) {
+                    mx = dp[j];
+                }
+            }
+            
+            dp[i] = mx + 1;
+        }
+        
+        return *max_element(dp, dp + n);
+    }
+};
+```
