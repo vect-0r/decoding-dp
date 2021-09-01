@@ -635,3 +635,35 @@ public:
 Other similar problems: 
 - Box Stacking Problem - GFG (https://www.geeksforgeeks.org/box-stacking-problem-dp-22/)
 - Building Bridges - GFG (https://www.geeksforgeeks.org/dynamic-programming-building-bridges/)
+
+## Count Palindromic Substrings - LC 647
+
+**Problem Link : https://leetcode.com/problems/palindromic-substrings/**
+
+```cpp
+class Solution {
+public:
+    int countSubstrings(string s) {
+        int n = s.size();
+        
+        int dp[n][n];
+        memset(dp, 0, sizeof dp);
+
+        int cnt = 0;
+        for (int gap = 0; gap < n; ++gap) {
+            for (int row = 0, col = gap; col < n; ++row, ++col) {
+                if (gap == 0) dp[row][col] = true;
+                else if (gap == 1) dp[row][col] = s[row] == s[col];
+                else {
+                    if (s[row] == s[col] && dp[row + 1][col - 1]) dp[row][col] = true;
+                    else dp[row][col] = false;
+                }
+                
+                if (dp[row][col]) cnt++;
+            }
+        }
+        
+        return cnt;
+    }
+};
+```
