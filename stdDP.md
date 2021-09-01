@@ -600,3 +600,38 @@ class Solution{
 	}
 };
 ```
+
+## Russian Doll Envelopes - LC 354
+
+**Problem Link : https://leetcode.com/problems/russian-doll-envelopes/**
+
+```cpp
+class Solution {
+public:
+    int maxEnvelopes(vector<vector<int>>& envelopes) {
+        int n = envelopes.size();
+
+        sort(envelopes.begin(), envelopes.end());
+        
+        vector<int> lis(n, 1);
+        
+        int ans = lis[0];
+        for (int i = 1; i < n; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (envelopes[j][1] < envelopes[i][1] && envelopes[j][0] < envelopes[i][0]) {
+                    if (lis[i] < lis[j] + 1) {
+                        lis[i] = lis[j] + 1;
+                    }
+                }
+            }
+            if (lis[i] > ans) ans = lis[i];
+        }
+
+        return ans;
+    }
+};
+```
+
+Other similar problems: 
+- Box Stacking Problem - GFG (https://www.geeksforgeeks.org/box-stacking-problem-dp-22/)
+- Building Bridges - GFG (https://www.geeksforgeeks.org/dynamic-programming-building-bridges/)
